@@ -268,7 +268,7 @@ class V8_EXPORT_PRIVATE CodeStubAssembler
     } else {
       DCHECK_EQ(mode, ParameterMode::INTPTR_PARAMETERS);
       intptr_t constant;
-      if (ToIntPtrConstant(node, constant)) {
+      if (ToIntPtrConstant(node, &constant)) {
         *out = constant;
         return true;
       }
@@ -847,6 +847,7 @@ class V8_EXPORT_PRIVATE CodeStubAssembler
 
   // Reference is the CSA-equivalent of a Torque reference value,
   // representing an inner pointer into a HeapObject.
+  // TODO(gsps): Remove in favor of flattened {Load,Store}Reference interface
   struct Reference {
     TNode<HeapObject> object;
     TNode<IntPtrT> offset;
